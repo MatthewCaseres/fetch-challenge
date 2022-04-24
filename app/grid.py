@@ -11,9 +11,9 @@ def getOpposingCorners(rect: Rectangle) -> tuple[Point, Point]:
     """
     return min(rect, key=lambda x: (x[0], -x[1])), max(rect, key=lambda x: (x[0], -x[1]))
 
-def getGrid(dims: Dimensions, topLeft: Point, bottomRight: Point) -> np.ndarray:
+def getGridFromOpposing(dims: Dimensions, topLeft: Point, bottomRight: Point) -> np.ndarray:
     """
-    Use the meshgrid api to make the grid, reformat into the desired format.
+    Take the topleft and bottomright corners and use numpy meshgrid api, reformat into the desired format.
     """
     nx, ny = dims
     (x1, y1), (x2, y2) = topLeft, bottomRight
@@ -21,4 +21,12 @@ def getGrid(dims: Dimensions, topLeft: Point, bottomRight: Point) -> np.ndarray:
     ygrid = np.linspace(y1, y2, ny)
     grid = np.meshgrid(xgrid, ygrid)
     grid = np.stack(grid, axis=2)
+    return grid
+
+def getGrid(dims: Dimensions, rect: Rectangle) -> np.ndarray:
+    """
+    get the opposing corners then use those to make the grid
+    """
+    topLeft, bottomRight = getOpposingCorners(rect)
+    grid = getGridFromOpposing(dims, topLeft, bottomRight)
     return grid

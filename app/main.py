@@ -9,9 +9,8 @@ class Input(BaseModel):
 app = FastAPI()
 
 @app.post("/calculate/")
-async def create_item(input: Input):
-    topLeft, bottomRight = getOpposingCorners(input.rectangle)
-    grid = getGrid(input.dims, topLeft, bottomRight)
+async def create_grid(input: Input):
+    grid = getGrid(input.dims, input.rectangle)
     # must be JSON serializable
     return grid.tolist()
 
