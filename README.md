@@ -16,7 +16,7 @@ docker run -d -p 80:80 fetch
 
 ## Using the API
 
-The web server should start and be running and you can use the API that is appropriate for your docker host. I go to http://127.0.0.1/docs and use the swagger UI to test the API. The API is `POST` on `/calculate`.
+The web server should start and be running and you can use the API that is appropriate for your docker host. I go to http://127.0.0.1/docs and use the swagger UI to verify that the web server is running. The API is `POST` on `/calculate`.
 
 ## Testing
 
